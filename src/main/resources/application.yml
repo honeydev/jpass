@@ -1,4 +1,10 @@
 spring:
   application:
     name: jpass
-
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5481/jpass}
+    username: ${SPRING_DATASOURCE_USERNAME:jpass}
+    password: ${SPRING_DATASOURCE_PASSWORD:jpass}
+    driver-class-name: org.postgresql.Driver
+  flyway:
+    enabled: true
