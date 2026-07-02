@@ -12,7 +12,7 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
-    private Integer id;
+    private Long id;
 
     @Column(unique = true, length = 100, nullable = false)
     private String email;
@@ -43,7 +43,7 @@ public class UserEntity {
         return createdAt;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
@@ -73,5 +73,13 @@ public class UserEntity {
 
     public String getPasswordHash() {
         return passwordHash;
+    }
+
+    public Collection<RoleEntity> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<RoleEntity> roles) {
+        this.roles = roles;
     }
 }

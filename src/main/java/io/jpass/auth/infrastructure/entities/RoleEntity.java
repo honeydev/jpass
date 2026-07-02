@@ -1,5 +1,7 @@
 package io.jpass.auth.infrastructure.entities;
 
+import io.jpass.auth.domain.model.Role;
+import io.jpass.auth.domain.model.RoleName;
 import jakarta.persistence.*;
 
 import java.util.Collection;
@@ -11,11 +13,13 @@ public class RoleEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String name;
+    @Enumerated(EnumType.STRING)
+    private RoleName name;
+
     @ManyToMany(mappedBy = "roles")
     private Collection<UserEntity> users;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "roles_privileges",
             joinColumns = @JoinColumn(
@@ -23,4 +27,16 @@ public class RoleEntity {
             inverseJoinColumns = @JoinColumn(
                     name = "privilege_id", referencedColumnName = "id"))
     private Collection<PrivilegeEntity> privileges;
+
+    public RoleName getName() {
+        return name;
+    }
+
+    public void setName(RoleName name) {
+        this.name = name;
+    }
+
+    public Collection<PrivilegeEntity> getPrivileges() {
+        return privileges;
+    }
 }

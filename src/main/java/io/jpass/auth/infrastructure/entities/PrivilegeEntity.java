@@ -1,10 +1,7 @@
 package io.jpass.auth.infrastructure.entities;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Entity;
+import io.jpass.auth.domain.model.PrivilegeName;
+import jakarta.persistence.*;
 
 import java.util.Collection;
 
@@ -15,8 +12,13 @@ public class PrivilegeEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String name;
+    @Enumerated(EnumType.STRING)
+    private PrivilegeName name;
 
     @ManyToMany(mappedBy = "privileges")
     private Collection<RoleEntity> roles;
+
+    public PrivilegeName getName() {
+        return name;
+    }
 }

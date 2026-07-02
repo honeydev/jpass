@@ -3,7 +3,7 @@ create sequence role_entity_seq start with 1 increment by 50;
 create sequence privilege_entity_seq start with 1 increment by 50;
 
 create table user_entity (
-    id integer not null,
+    id bigint not null,
     email varchar(100) not null,
     password_hash varchar(255) not null,
     created_at timestamp(6),

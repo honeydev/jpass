@@ -8,3 +8,9 @@ spring:
     driver-class-name: org.postgresql.Driver
   flyway:
     enabled: true
+
+jpass:
+  security:
+    jwt:
+      secret: ${JPASS_JWT_SECRET:change-this-development-secret-at-least-32-chars}
+      expiration: ${JPASS_JWT_EXPIRATION:3600}
