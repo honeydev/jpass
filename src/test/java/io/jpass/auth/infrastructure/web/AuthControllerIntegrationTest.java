@@ -1,6 +1,7 @@
 package io.jpass.auth.infrastructure.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.jpass.auth.domain.model.RoleName;
 import io.jpass.auth.infrastructure.entities.RoleEntity;
 import io.jpass.auth.infrastructure.entities.UserEntity;
 import io.jpass.auth.infrastructure.repositories.RoleJpaRepository;
@@ -57,7 +58,7 @@ class AuthControllerIntegrationTest {
         roleJpaRepository.deleteAll();
 
         RoleEntity role = new RoleEntity();
-        role.setName("USER");
+        role.setName(RoleName.USER);
         RoleEntity savedRole = roleJpaRepository.save(role);
 
         UserEntity user = new UserEntity();
@@ -128,7 +129,7 @@ class AuthControllerIntegrationTest {
         org.assertj.core.api.Assertions.assertThat(passwordEncoder.matches(PASSWORD, user.getPasswordHash())).isTrue();
         org.assertj.core.api.Assertions.assertThat(user.getRoles())
                 .extracting(RoleEntity::getName)
-                .containsExactly("USER");
+                .containsExactly(RoleName.USER);
     }
 
     @Test

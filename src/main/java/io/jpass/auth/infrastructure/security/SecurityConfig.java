@@ -1,11 +1,11 @@
 package io.jpass.auth.infrastructure.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.jpass.auth.domain.model.RoleName;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
@@ -19,9 +19,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-import java.lang.reflect.Array;
-import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -56,7 +53,9 @@ public class SecurityConfig {
                         )
                         .permitAll()
                         .requestMatchers("/api/credentials")
-                        .hasRole("USER")
+                        .hasRole(RoleName.USER.value)
+                        .anyRequest()
+                        .authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

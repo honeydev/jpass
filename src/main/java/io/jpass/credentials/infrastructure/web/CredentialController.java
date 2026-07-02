@@ -1,7 +1,9 @@
 package io.jpass.credentials.infrastructure.web;
 
+import io.jpass.auth.domain.model.RoleName;
 import io.jpass.auth.infrastructure.web.AuthController;
 import jakarta.validation.Valid;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,8 +20,6 @@ public class CredentialController {
 
     @PostMapping
     public CredentialResponse create() {
-
-
 
         return new CredentialResponse(1L);
     }
