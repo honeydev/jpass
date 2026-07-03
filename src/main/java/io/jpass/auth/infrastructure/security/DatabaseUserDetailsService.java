@@ -43,7 +43,9 @@ public class DatabaseUserDetailsService implements UserDetailsService {
             return java.util.List.of();
         }
 
-        return user.getRoles().stream()
+        return user
+                .getRoles()
+                .stream()
                 .filter(Objects::nonNull)
                 .flatMap(this::roleAuthorities)
                 .distinct()
